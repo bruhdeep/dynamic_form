@@ -1,0 +1,26 @@
+{
+  "title": "User Profile",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "title": "First Name"
+    },
+    "lastName": {
+      "type": "string",
+      "title": "Last Name"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "age": {
+      "type": "number",
+      "title": "Age"
+    },
+    "tick": {
+      "type": "boolean",
+      "title": "tick"
+    }
+  }
+}
