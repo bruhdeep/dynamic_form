@@ -45,45 +45,37 @@ const Form: React.FC<FormProps> = ({ schema }) => {
     event.preventDefault();
     console.log("Form Data Submitted:", formData);
   };
+  
 
   const renderInput = (
     key: string,
     property: { type: string; title: string }
   ) => {
     const { type, title } = property;
-    switch (type) {
-      case "string":
-        return (
-          <TextInput
-            key={key}
-            name={key}
-            title={title}
-            value={formData[key] || ""}
-            onChange={handleChange}
-          />
-        );
-      case "number":
-        return (
-          <NumberInput
-            key={key}
-            name={key}
-            title={title}
-            value={formData[key] || ""}
-            onChange={handleChange}
-          />
-        );
-      case "boolean":
-        return (
-          <CheckboxInput
-            key={key}
-            name={key}
-            title={title}
-            checked={formData[key] || false}
-            onChange={handleChange}
-          />
-        );
-      default:
-        return null;
+
+    const commonProps = {
+      name: key,
+      title,
+      value: formData[key] || "",
+      onChange: handleChange,
+    };
+
+    if (type === "string") {
+      return <TextInput key={key} {...commonProps} />;
+    } else if (type === "number") {
+      return <NumberInput key={key} {...commonProps} />;
+    } else if (type === "boolean") {
+      return (
+        <CheckboxInput
+          key={key}
+          name={key}
+          title={title}
+          checked={formData[key] || false}
+          onChange={handleChange}
+        />
+      );
+    } else {
+      return null;
     }
   };
 
