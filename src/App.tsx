@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Form from "../components/Form";
+import Form from "./components/Form";
 import schema from "./schema.json";
 import "./styles.css";
 
