@@ -45,7 +45,6 @@ const Form: React.FC<FormProps> = ({ schema }) => {
     event.preventDefault();
     console.log("Form Data Submitted:", formData);
   };
-  
 
   const renderInput = (
     key: string,
@@ -68,10 +67,8 @@ const Form: React.FC<FormProps> = ({ schema }) => {
       return (
         <CheckboxInput
           key={key}
-          name={key}
-          title={title}
+          {...commonProps}
           checked={formData[key] || false}
-          onChange={handleChange}
         />
       );
     } else {
