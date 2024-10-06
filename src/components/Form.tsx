@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import TextInput from "./TextInput";
 import NumberInput from "./NumberInput";
 import CheckboxInput from "./CheckboxInput";
+// Import other input components as needed
 
 interface Schema {
   title: string;
@@ -46,34 +47,36 @@ const Form: React.FC<FormProps> = ({ schema }) => {
     console.log("Form Data Submitted:", formData);
   };
 
+  const inputComponents: { [key: string]: React.FC<any> } = {
+    string: TextInput,
+    number: NumberInput,
+    boolean: CheckboxInput,
+  };
+
   const renderInput = (
     key: string,
     property: { type: string; title: string }
   ) => {
     const { type, title } = property;
+    const InputComponent = inputComponents[type];
+
+    if (!InputComponent) return null;
 
     const commonProps = {
+      key,
       name: key,
       title,
       value: formData[key] || "",
       onChange: handleChange,
     };
 
-    if (type === "string") {
-      return <TextInput key={key} {...commonProps} />;
-    } else if (type === "number") {
-      return <NumberInput key={key} {...commonProps} />;
-    } else if (type === "boolean") {
+    if (type === "boolean") {
       return (
-        <CheckboxInput
-          key={key}
-          {...commonProps}
-          checked={formData[key] || false}
-        />
+        <InputComponent {...commonProps} checked={formData[key] || false} />
       );
-    } else {
-      return null;
     }
+
+    return <InputComponent {...commonProps} />;
   };
 
   return (
